@@ -2,15 +2,7 @@ const https = require('https')
 const url = "https://jsonplaceholder.typicode.com/todos/1"
 
 async function handler() {
-  /*const response = await fetch(`https://jsonplaceholder.typicode.com/todos/1`, {
-      method: `GET`,
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-    .then((res) => res.json());
-
-  return response;*/
+ 
 
   let data = '';
   https.get(url, res => {
