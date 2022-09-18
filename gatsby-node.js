@@ -1,11 +1,18 @@
+
+const path = require("path")
+
 exports.onCreateBabelConfig = ({ actions }) => {
-    actions.setBabelPlugin({
-      name: `change-return-type`,
+    actions.setBabelPlugin(
+    {
+      name: path.resolve('./babel-plugins/change-return.js'),
       options: {}
     },
     {
-        name: `change-gatsby-function`,
+        name: path.resolve('./babel-plugins/change-gatsby-function.js'),
         options: {}
       },
     )
   }
+
+
+
