@@ -1,7 +1,32 @@
+const https = require('https')
+const url = "https://jsonplaceholder.typicode.com/todos/1"
 
+async function handler() {
+  /*const response = await fetch(`https://jsonplaceholder.typicode.com/todos/1`, {
+      method: `GET`,
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+    .then((res) => res.json());
 
-function handler(req, res) {
-    //res.status(200).json({ hello: `world` })
+  return response;*/
+
+  let data = '';
+  https.get(url, res => {
+    
+    res.on('data', chunk => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      data = JSON.parse(data);
+      console.log(data);
+    })
+  }).on('error', err => {
+    console.log(err.message);
+  })
+
+  return data;
 }
 
 function functionCaller() {
@@ -15,14 +40,13 @@ module.exports = function (babel) {
     name: "change-gatsby-function", // not required
     visitor: {
       ArrowFunctionExpression(path) {
-       
-        if(path.parent.callee === undefined) {
-            return
+        if (path.parent.callee === undefined) {
+          return;
         }
-        if ( path.parent.callee.name === "useGet") {
+        if (path.parent.callee.name === "useGet") {
           return functionCaller();
         }
       },
     },
   };
-}
+};
