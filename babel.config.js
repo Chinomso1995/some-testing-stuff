@@ -16,6 +16,6 @@ module.exports = {
   plugins: [
     path.resolve("./babel-plugins/change-return.js"),
     path.resolve("./babel-plugins/change-gatsby-function.js"),
-  
+    
   ],
 }

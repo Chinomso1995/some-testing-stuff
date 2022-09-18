@@ -1,7 +1,7 @@
 
 
 function handler(req, res) {
-    res.status(200).json({ hello: `world` })
+    //res.status(200).json({ hello: `world` })
 }
 
 function functionCaller() {
@@ -15,7 +15,11 @@ module.exports = function (babel) {
     name: "change-gatsby-function", // not required
     visitor: {
       ArrowFunctionExpression(path) {
-        if (path?.parent?.callee?.name === "useGet") {
+       
+        if(path.parent.callee === undefined) {
+            return
+        }
+        if ( path.parent.callee.name === "useGet") {
           return functionCaller();
         }
       },

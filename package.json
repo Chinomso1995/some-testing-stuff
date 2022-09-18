@@ -9,7 +9,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "build": "gatsby build",
+    "build": "babel src -d build",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
@@ -19,6 +19,9 @@
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.1",
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-gatsby": "^2.23.0"
   }
