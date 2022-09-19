@@ -9,7 +9,7 @@ module.exports = function (babel) {
     name: "change-return-type", // not required
     visitor: {
       ReturnStatement(path) {
-        if (path.parentPath.parentPath.parent.callee === undefined) {
+        if (path.parentPath.parentPath.parent.callee === undefined || path.node.argument.value === undefined) {
           return;
         }
         if (
