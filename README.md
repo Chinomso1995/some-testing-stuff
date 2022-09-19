@@ -13,3 +13,7 @@ They get compiled into the pages folder in the build directory.
 
 
 Theres already some examples. 
+
+
+
+Note since the babel plugins are for the React hook useGet, you might need to comment one of them out in the babel config and gatsby node to see how they each work

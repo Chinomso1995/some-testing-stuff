@@ -1,32 +1,15 @@
-const https = require('https')
-const url = "https://jsonplaceholder.typicode.com/todos/1"
 
-async function handler() {
- 
-
-  let data = '';
-  https.get(url, res => {
-    
-    res.on('data', chunk => {
-      data += chunk;
-    });
-    res.on('end', () => {
-      data = JSON.parse(data);
-      console.log(data);
-    })
-  }).on('error', err => {
-    console.log(err.message);
-  })
-
-  return data;
-}
-
-function functionCaller() {
-  handler();
-}
+const axios = require('axios')
 
 module.exports = function (babel) {
-  const { types: t } = babel;
+  const { types: t, template } = babel;
+  
+  const functionExpression = template.statement.ast(`async (req, res) =>  {
+ 
+
+    const listofUsers = (await axios.get('https://jsonplaceholder.typicode.com/todos/1')).data;
+    return res.json(listOfUsers)
+  }`);
 
   return {
     name: "change-gatsby-function", // not required
@@ -36,9 +19,11 @@ module.exports = function (babel) {
           return;
         }
         if (path.parent.callee.name === "useGet") {
-          return functionCaller();
+          path.replaceWith(
+            functionExpression
+          );
         }
-      },
-    },
+      }
+    }
   };
 };
