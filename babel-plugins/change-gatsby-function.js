@@ -1,14 +1,20 @@
 
-const axios = require('axios')
+
 
 module.exports = function (babel) {
   const { types: t, template } = babel;
   
-  const functionExpression = template.statement.ast(`async (req, res) =>  {
+  const functionExpression = template.statement.ast(`async () =>  {
  
-
-    const listofUsers = (await axios.get('https://jsonplaceholder.typicode.com/todos/1')).data;
-    return res.json(listOfUsers)
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const result = await response.json();
+    
+    return result
   }`);
 
   return {
